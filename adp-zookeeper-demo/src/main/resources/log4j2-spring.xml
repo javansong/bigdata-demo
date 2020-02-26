@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Configuration status="WARN" monitorInterval="30">
+    <Properties>
+        <Property name="LOG_HOME">./logs/</Property>
+    </Properties>
+
+    <Appenders>
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout>
+                <Pattern>[%level][%d{yyyy-MM-dd HH:mm:ss}][adp-zookeeper-demo] [%C->%M(%L)] %m%n</Pattern>
+            </PatternLayout>
+        </Console>
+
+        <RollingFile name="logToFile" filename="${LOG_HOME}adp-zookeeper-demo.log"
+                     filePattern="${LOG_HOME}adp-zookeeper-demo.%d{yyyy-MM-dd}log">
+            <PatternLayout>
+                <Pattern>[%level][%d{yyyy-MM-dd HH:mm:ss}][adp-zookeeper-demo] [%C->%M(%L)] %m%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <AsyncRoot level="info" includeLocation="true">
+            <AppenderRef ref="console"/>
+            <AppenderRef ref="logToFile"/>
+        </AsyncRoot>
+    </Loggers>
+
+</Configuration>
